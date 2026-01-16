@@ -39,7 +39,8 @@ export default function BookServicePage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = {
       customerName: formData.get('customerName'),
       email: formData.get('email'),
@@ -72,7 +73,7 @@ export default function BookServicePage() {
       toast.success('Booking request submitted successfully!');
       
       // Reset form
-      e.currentTarget.reset();
+      form.reset();
     } catch (error) {
       console.error('Error submitting booking:', error);
       toast.error(error instanceof Error ? error.message : 'Failed to submit booking. Please try again.');
