@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
+import MobileTabBar from "@/components/layout/MobileTabBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Toaster } from 'sonner';
 
@@ -146,6 +147,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <MobileTabBar />
         <WhatsAppButton />
         <Toaster 
           position="top-right" 

@@ -87,6 +87,16 @@ export default function Header() {
         <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
           <div className="border-t border-gray-200 pt-4">
             <div className="flex flex-col space-y-4">
+              {/* Prominent Book Service Button */}
+              <Link
+                href="/book"
+                className="flex items-center justify-center space-x-2 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--dark-navy)] text-white px-6 py-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Zap className="w-5 h-5" />
+                <span>Book Service Now</span>
+              </Link>
+              
               {navItems.map((item) => (
                 <Link
                   key={item.name}

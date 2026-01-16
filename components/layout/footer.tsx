@@ -4,10 +4,10 @@ import { Zap, Phone, Mail, MapPin } from 'lucide-react';
 export default function Footer() {
   return (
     <footer className="bg-gradient-to-br from-[var(--dark-navy)] via-gray-900 to-gray-800 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pb-24 md:pb-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 md:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-[var(--electric-blue)] to-[var(--light-blue)] rounded-lg">
                 <Zap className="w-6 h-6 text-white" />
@@ -40,7 +40,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="col-span-1">
             <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               <li>
@@ -77,7 +77,7 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="col-span-1">
             <h4 className="text-lg font-semibold mb-4 text-white">Our Services</h4>
             <ul className="space-y-2">
               <li>
