@@ -30,11 +30,6 @@ async function main() {
     console.log('⏭️ Admin user already exists')
   }
 
-  // Seed job categories first
-  await seedJobCategories()
-
-  // Seed jobs (now with categories)
-  await seedJobs()
 
   console.log('🎉 Database seeding completed!')
 }
