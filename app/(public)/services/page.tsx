@@ -9,6 +9,57 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Electrical Services',
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'ElectriSafe Power Solutions',
+      telephone: '+919565555581',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lucknow',
+        addressRegion: 'UP',
+        addressCountry: 'IN'
+      }
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Lucknow'
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Electrical Services',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Residential Electrical Services',
+            description: 'Complete electrical solutions for homes'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Commercial Electrical Services',
+            description: 'Professional electrical services for offices and businesses'
+          }
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Wiring & Rewiring',
+            description: 'Expert wiring services for new constructions and renovations'
+          }
+        }
+      ]
+    }
+  };
+
   const services = [
     {
       icon: Home,
@@ -134,6 +185,14 @@ export default function ServicesPage() {
 
   return (
     <div className="min-h-screen">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[var(--dark-navy)] to-gray-900 text-white pt-32 pb-16 overflow-hidden">
         {/* Background Image */}

@@ -1,7 +1,5 @@
 import { PrismaClient } from '@prisma/client'
 import bcrypt from 'bcryptjs'
-import { seedJobCategories } from './seeds/job-categories'
-import { seedJobs } from './seeds/jobs'
 
 const prisma = new PrismaClient()
 

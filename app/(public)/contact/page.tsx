@@ -15,6 +15,31 @@ export default function ContactPage() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    mainEntity: {
+      '@type': 'LocalBusiness',
+      name: 'ElectriSafe Power Solutions',
+      telephone: '+919565555581',
+      email: 'info@electrisafe.in',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lucknow',
+        addressRegion: 'Uttar Pradesh',
+        addressCountry: 'IN'
+      },
+      openingHours: 'Mo-Su 00:00-23:59',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: '+919565555581',
+        contactType: 'Customer Service',
+        areaServed: 'IN',
+        availableLanguage: ['English', 'Hindi']
+      }
+    }
+  };
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
@@ -66,6 +91,14 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[var(--dark-navy)] to-gray-900 text-white pt-32 pb-16 overflow-hidden">
         {/* Background Image */}

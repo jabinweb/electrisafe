@@ -5,8 +5,61 @@ import Image from 'next/image';
 import { Phone, MessageCircle, Zap, Calendar, CheckCircle, Award, Clock, Users, Star, Home, Building2, Cable, ShieldCheck, Battery, Wrench } from 'lucide-react';
 
 export default function HomePage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'ElectriSafe Power Solutions',
+    image: 'https://electrisafe.in/icons/icon-512x512.png',
+    '@id': 'https://electrisafe.in',
+    url: 'https://electrisafe.in',
+    telephone: '+919565555581',
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Lucknow',
+      addressLocality: 'Lucknow',
+      addressRegion: 'UP',
+      postalCode: '226001',
+      addressCountry: 'IN'
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 26.8467,
+      longitude: 80.9462
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      opens: '00:00',
+      closes: '23:59'
+    },
+    sameAs: [
+      'https://www.facebook.com/electrisafe',
+      'https://www.instagram.com/electrisafe'
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5',
+      reviewCount: '500'
+    },
+    areaServed: {
+      '@type': 'City',
+      name: 'Lucknow'
+    },
+    description: 'Professional electrical services for homes, offices, and commercial spaces in Lucknow. 24/7 emergency support, licensed electricians, quality workmanship.',
+    slogan: 'Safe Power for Every Space'
+  };
+
   return (
     <div className="min-h-screen">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
+        }}
+      />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[var(--dark-navy)] via-gray-900 to-[var(--dark-navy)] text-white pt-40 pb-32 overflow-hidden min-h-[50vh] flex items-center">
         {/* Background Image */}

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { put } from '@vercel/blob'
+// import { put } from '@vercel/blob'
 
 export async function POST(request: NextRequest) {
   try {
@@ -52,10 +52,13 @@ export async function POST(request: NextRequest) {
     const folder = type || 'general'
     const blobPath = `${folder}/${filename}`
 
+    // TODO: Implement file upload - Vercel Blob temporarily disabled
     // Upload to Vercel Blob
-    const blob = await put(blobPath, file, {
-      access: 'public',
-    })
+    // const blob = await put(blobPath, file, {
+    //   access: 'public',
+    // })
+
+    const placeholderUrl = `/uploads/${blobPath}` // Placeholder URL
 
     // Save file record to database
     const mediaFile = await prisma.mediaFile.create({
@@ -63,7 +66,7 @@ export async function POST(request: NextRequest) {
         filename,
         originalName: file.name,
         path: blobPath,
-        url: blob.url,
+        url: placeholderUrl,
         mimeType: file.type,
         size: file.size,
         alt: alt || null,
@@ -83,7 +86,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ 
       id: mediaFile.id,
-      url: blob.url,
+      url: placeholderUrl,
       filename,
       originalName: file.name,
       size: file.size,

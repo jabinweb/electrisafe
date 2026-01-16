@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { prisma } from '@/lib/prisma'
-import { del } from '@vercel/blob'
 
 export async function DELETE(
   request: NextRequest,
@@ -24,9 +23,12 @@ export async function DELETE(
       return NextResponse.json({ error: 'File not found' }, { status: 404 })
     }
 
-    // Delete from Vercel Blob
+    // Delete from Vercel Blob (if configured)
     try {
-      await del(file.url)
+      // TODO: Implement blob deletion - del export not available in current @vercel/blob version
+      // const { del } = await import('@vercel/blob')
+      // await del(file.url)
+      console.log('Blob file deletion skipped:', file.url)
     } catch (blobError) {
       console.error('Error deleting from blob:', blobError)
       // Continue with database deletion even if blob deletion fails

@@ -1,7 +1,7 @@
 {
   "name": "ElectriSafe Power Solutions - Safe Power for Every Space",
   "short_name": "ElectriSafe",
-  "description": "Transforming careers and lives through personalized guidance and innovative training programs",
+  "description": "Professional electrical services for homes, offices, and commercial spaces in Lucknow. 24/7 emergency support, licensed electricians, quality workmanship.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#2d5296",
@@ -9,9 +9,9 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "categories": [
-    "education",
-    "training",
-    "career"
+    "business",
+    "utilities",
+    "lifestyle"
   ],
   "lang": "en-US",
   "dir": "ltr",

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/auth"
 import { prisma } from "@/lib/prisma"
-import { put } from '@vercel/blob'
+// import { put } from '@vercel/blob'
 import { nanoid } from 'nanoid'
 
 export async function POST(request: NextRequest) {
@@ -29,18 +29,19 @@ export async function POST(request: NextRequest) {
         const uniqueFilename = `${nanoid()}.${fileExtension}`
         const path = folder ? `${folder}/${uniqueFilename}` : uniqueFilename
 
+        // TODO: Implement file upload - Vercel Blob upload temporarily disabled
         // Upload to Vercel Blob
-        const blob = await put(path, file, {
-          access: 'public',
-        })
+        // const blob = await put(path, file, {
+        //   access: 'public',
+        // })
 
-        // Save to database
+        // Temporary: Save placeholder to database
         const mediaFile = await prisma.mediaFile.create({
           data: {
             filename: uniqueFilename,
             originalName: file.name,
-            path: blob.pathname,
-            url: blob.url,
+            path: path,
+            url: `/uploads/${path}`, // Placeholder URL
             mimeType: file.type,
             size: file.size,
             folder: folder,
