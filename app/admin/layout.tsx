@@ -1,6 +1,5 @@
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
-import { Toaster } from 'sonner'
 import Sidebar from "@/components/admin/sidebar"
 
 interface DashboardLayoutProps {
@@ -22,34 +21,21 @@ export default async function AdminDashboardLayout({ children }: DashboardLayout
   }
 
   return (
-    <div className="min-h-screen bg-gray-50"> {/* Add top padding for main header */}
-      <div className="h-[80px] w-full flex justify-end bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900">
-      </div>
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[280px_1fr] pt-10">
+    <div className="min-h-screen bg-background pt-20">
+      <div className="max-w-7xl mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
         {/* Sidebar Column */}
-        <div className="bg-white border-r border-gray-200">
+        <div>
           <Sidebar />
         </div>
         
         {/* Main Content Column */}
         <div className="flex flex-col">
-
-          
           {/* Main Content */}
-          <main className="flex-1 p-6">
+          <main className="flex-1">
             {children}
           </main>
         </div>
       </div>
-      
-      <Toaster 
-        position="top-right" 
-        richColors 
-        closeButton
-        toastOptions={{
-          duration: 4000,
-        }}
-      />
     </div>
   )
 }

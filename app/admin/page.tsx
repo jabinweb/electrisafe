@@ -78,62 +78,62 @@ export default function AdminDashboard() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="font-heading text-3xl text-gray-800">
+        <h1 className="font-heading text-3xl text-foreground">
           Welcome back, {session.user?.name}
         </h1>
-        <p className="text-gray-600 mt-1">Here&apos;s what&apos;s happening with your platform today.</p>
+        <p className="text-muted-foreground mt-1">Here&apos;s what&apos;s happening with your platform today.</p>
       </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+        <Card className="border-0 hover:shadow-lg transition-all group bg-gradient-to-br from-primary/5 to-transparent">
           <CardContent className="p-6">
             <Link href="/admin/blog/new">
-              <div className="flex items-center space-x-4 cursor-pointer group">
-                <div className="w-12 h-12 bg-scio-blue rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <PlusCircle className="text-white w-6 h-6" />
+              <div className="flex items-center space-x-4 cursor-pointer">
+                <div className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-md">
+                  <PlusCircle className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-gray-800 group-hover:text-scio-blue transition-colors">
+                  <h3 className="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                     Create New Post
                   </h3>
-                  <p className="text-gray-600 text-sm">Write a new blog post</p>
+                  <p className="text-muted-foreground text-sm">Write a new blog post</p>
                 </div>
               </div>
             </Link>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+        <Card className="border-0 hover:shadow-lg transition-all group bg-gradient-to-br from-accent/10 to-transparent">
           <CardContent className="p-6">
             <Link href="/admin/users">
-              <div className="flex items-center space-x-4 cursor-pointer group">
-                <div className="w-12 h-12 bg-scio-orange rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Users className="text-white w-6 h-6" />
+              <div className="flex items-center space-x-4 cursor-pointer">
+                <div className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-md">
+                  <Users className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-gray-800 group-hover:text-scio-orange transition-colors">
+                  <h3 className="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                     Manage Users
                   </h3>
-                  <p className="text-gray-600 text-sm">View and edit users</p>
+                  <p className="text-muted-foreground text-sm">View and edit users</p>
                 </div>
               </div>
             </Link>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow">
+        <Card className="border-0 hover:shadow-lg transition-all group bg-gradient-to-br from-secondary/10 to-transparent">
           <CardContent className="p-6">
             <Link href="/admin/content/homepage">
-              <div className="flex items-center space-x-4 cursor-pointer group">
-                <div className="w-12 h-12 bg-scio-green rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Settings className="text-white w-6 h-6" />
+              <div className="flex items-center space-x-4 cursor-pointer">
+                <div className="w-14 h-14 bg-primary text-primary-foreground rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform shadow-md">
+                  <Settings className="w-7 h-7" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-gray-800 group-hover:text-scio-green transition-colors">
+                  <h3 className="font-heading text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                     Site Settings
                   </h3>
-                  <p className="text-gray-600 text-sm">Configure homepage</p>
+                  <p className="text-muted-foreground text-sm">Configure homepage</p>
                 </div>
               </div>
             </Link>
@@ -143,57 +143,57 @@ export default function AdminDashboard() {
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center">
               <Users className="w-4 h-4 mr-2" />
               Total Users
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-scio-blue">
+            <div className="text-3xl font-bold text-primary">
               {loading ? '...' : stats.totalUsers}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center">
               <FileText className="w-4 h-4 mr-2" />
               Total Posts
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-scio-orange">
+            <div className="text-3xl font-bold text-foreground">
               {loading ? '...' : stats.totalPosts}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center">
               <Activity className="w-4 h-4 mr-2" />
               Published
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-scio-green">
+            <div className="text-3xl font-bold text-green-600 dark:text-green-400">
               {loading ? '...' : stats.publishedPosts}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center">
+            <CardTitle className="text-sm font-medium text-muted-foreground flex items-center">
               <Calendar className="w-4 h-4 mr-2" />
               Drafts
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-gray-500">
+            <div className="text-3xl font-bold text-muted-foreground">
               {loading ? '...' : stats.draftPosts}
             </div>
           </CardContent>
@@ -202,35 +202,35 @@ export default function AdminDashboard() {
 
       {/* Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader>
-            <CardTitle className="flex items-center">
-              <BarChart3 className="w-5 h-5 mr-2 text-scio-blue" />
+            <CardTitle className="flex items-center text-foreground">
+              <BarChart3 className="w-5 h-5 mr-2 text-primary" />
               Recent Activity
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <span className="text-sm text-gray-600">New user registrations</span>
-                <span className="font-semibold text-scio-blue">{stats.totalUsers}</span>
+              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <span className="text-sm text-muted-foreground">New user registrations</span>
+                <span className="font-semibold text-primary">{stats.totalUsers}</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <span className="text-sm text-gray-600">Blog posts published</span>
-                <span className="font-semibold text-scio-green">{stats.publishedPosts}</span>
+              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <span className="text-sm text-muted-foreground">Blog posts published</span>
+                <span className="font-semibold text-green-600 dark:text-green-400">{stats.publishedPosts}</span>
               </div>
-              <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                <span className="text-sm text-gray-600">Draft posts</span>
-                <span className="font-semibold text-gray-500">{stats.draftPosts}</span>
+              <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <span className="text-sm text-muted-foreground">Draft posts</span>
+                <span className="font-semibold text-muted-foreground">{stats.draftPosts}</span>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-lg">
+        <Card className="border-0 hover:shadow-md transition-shadow">
           <CardHeader>
-            <CardTitle className="flex items-center">
-              <MessageSquare className="w-5 h-5 mr-2 text-scio-orange" />
+            <CardTitle className="flex items-center text-foreground">
+              <MessageSquare className="w-5 h-5 mr-2 text-primary" />
               Quick Links
             </CardTitle>
           </CardHeader>

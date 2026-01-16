@@ -58,12 +58,12 @@ export default function SignInPage() {
     <Card className="w-full max-w-md shadow-2xl border-0">
       <CardHeader className="text-center pb-6">
         <CardTitle className="font-heading text-2xl text-[var(--electric-blue)]">Sign In</CardTitle>
-        <p className="font-body text-gray-600">Welcome back to ElectriSafe</p>
+        <p className="font-body text-muted-foreground">Welcome back to ElectriSafe</p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
               Email
             </label>
             <Input
@@ -72,13 +72,13 @@ export default function SignInPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="h-11 border-gray-300 focus:border-scio-blue focus:ring-scio-blue"
+              className="h-11"
               required
             />
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
               Password
             </label>
             <Input
@@ -87,13 +87,13 @@ export default function SignInPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter your password"
-              className="h-11 border-gray-300 focus:border-scio-blue focus:ring-scio-blue"
+              className="h-11"
               required
             />
           </div>
 
           {error && (
-            <div className="text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg">
+            <div className="text-destructive text-sm text-center bg-destructive/10 p-3 rounded-lg">
               {error}
             </div>
           )}
@@ -108,7 +108,7 @@ export default function SignInPage() {
         </form>
 
         <div className="mt-6 text-center">
-          <p className="font-body text-sm text-gray-600">
+          <p className="font-body text-sm text-muted-foreground">
             Don&apos;t have an account?{' '}
             <Link href="/auth/signup" className="text-[var(--electric-blue)] hover:underline font-medium">
               Sign up

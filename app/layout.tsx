@@ -6,6 +6,7 @@ import Footer from "@/components/layout/footer";
 import MobileTabBar from "@/components/layout/MobileTabBar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { Toaster } from 'sonner';
+import { Providers } from '@/components/providers';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -135,28 +136,31 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#0080ff" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
-        <Header />
-        {children}
-        <Footer />
-        <MobileTabBar />
-        <WhatsAppButton />
-        <Toaster 
-          position="top-right" 
-          richColors 
-          closeButton
-          toastOptions={{
-            duration: 4000,
-          }}
-        />
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+          <MobileTabBar />
+          <WhatsAppButton />
+          <Toaster 
+            position="top-right" 
+            richColors 
+            closeButton
+            toastOptions={{
+              duration: 4000,
+            }}
+          />
+        </Providers>
       </body>
     </html>
   );

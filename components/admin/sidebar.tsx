@@ -121,27 +121,27 @@ export default function Sidebar() {
     const parentActive = isParentActive(item)
 
     return (
-      <div key={item.id} className="mb-1">
+      <div key={item.id} className="mb-0.5">
         <div
-          className={`flex items-center justify-between p-3 rounded-lg transition-all duration-200 cursor-pointer ${
+          className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer group ${
             active || parentActive
-              ? 'bg-scio-blue text-white shadow-md'
-              : 'text-gray-700 hover:bg-gray-100'
-          } ${depth > 0 ? 'ml-4 text-sm' : ''}`}
+              ? 'bg-primary text-primary-foreground shadow-md scale-[1.02]'
+              : 'hover:bg-muted/60 hover:shadow-sm'
+          } ${depth > 0 ? 'ml-6 text-sm py-2' : ''}`}
           onClick={() => {
             if (hasChildren) {
               toggleExpanded(item.id)
             }
           }}
         >
-          <Link href={hasChildren ? '#' : item.href} className="flex items-center flex-1">
-            <i className={`${item.icon} w-5 text-center mr-3`}></i>
-            <span className="font-medium">{item.label}</span>
+          <Link href={hasChildren ? '#' : item.href} className="flex items-center flex-1 min-w-0">
+            <i className={`${item.icon} w-5 text-center mr-3 flex-shrink-0 ${active || parentActive ? '' : 'text-muted-foreground group-hover:text-foreground'}`}></i>
+            <span className="font-medium truncate">{item.label}</span>
           </Link>
           {hasChildren && (
-            <i className={`fas fa-chevron-down text-xs transition-transform duration-200 ${
+            <i className={`fas fa-chevron-down text-xs transition-transform duration-200 flex-shrink-0 ml-2 ${
               isExpanded ? 'rotate-180' : ''
-            }`}></i>
+            } ${active || parentActive ? '' : 'text-muted-foreground group-hover:text-foreground'}`}></i>
           )}
         </div>
 
@@ -155,17 +155,23 @@ export default function Sidebar() {
   }
 
   return (
-    <div className="h-full bg-white border-r border-gray-200 shadow-lg flex flex-col">
-      <div className="p-6 flex-1">
-        {/* Navigation */}
-        <nav className="space-y-1">
-          {sidebarItems.map(item => renderSidebarItem(item))}
-        </nav>
+    <aside className="flex flex-col space-y-3 max-h-[calc(100vh-8rem)]">
+      {/* Brand Header */}
+      <div className="px-4 py-5 bg-gradient-to-br from-primary to-primary/80 rounded-xl shadow-sm flex-shrink-0">
+        <h2 className="text-lg font-bold text-primary-foreground">Admin Panel</h2>
+        <p className="text-xs text-primary-foreground/80 mt-0.5">Manage your platform</p>
       </div>
-      <div className="p-6 border-t border-gray-100">
+      
+      {/* Navigation */}
+      <nav className="flex-1 overflow-y-auto space-y-1 px-1 scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
+          {sidebarItems.map(item => renderSidebarItem(item))}
+      </nav>
+      
+      {/* Footer */}
+      <div className="pt-2 flex-shrink-0">
         <LogoutButton />
       </div>
-    </div>
+    </aside>
   )
 }
 
