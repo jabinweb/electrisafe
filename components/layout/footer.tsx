@@ -59,11 +59,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/book" className="text-[var(--electric-blue)] hover:text-white font-semibold transition-colors text-sm">
-                  📅 Book Service
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-gray-300 hover:text-[var(--electric-blue)] transition-colors text-sm">
                   Contact
                 </Link>
@@ -71,6 +66,11 @@ export default function Footer() {
               <li>
                 <Link href="/faq" className="text-gray-300 hover:text-[var(--electric-blue)] transition-colors text-sm">
                   FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/book" className="text-[var(--electric-blue)] hover:text-white font-semibold transition-colors text-sm">
+                  📅 Book Service
                 </Link>
               </li>
             </ul>

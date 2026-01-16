@@ -63,6 +63,67 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Trusted By Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="text-xs font-bold text-[var(--electric-blue)] tracking-widest uppercase mb-4">
+              Trusted Partnership
+            </p>
+            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+              Powering India&apos;s Leading Brands
+            </h2>
+            <div className="w-16 h-0.5 bg-[var(--electric-blue)] mx-auto mb-6"></div>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Trusted by Fortune 500 companies and leading institutions across telecommunications, healthcare, retail, and infrastructure sectors
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-gray-200 rounded-2xl overflow-hidden shadow-sm">
+            {[
+              'Vodafone Idea',
+              'Airtel',
+              'Kaya Clinic',
+              'W Store',
+              'Aurelia',
+              'Lulu Mall',
+              'Palassio',
+              'Railway Kochi',
+              'Maikual Hospital',
+              'Titan Watch',
+              'Indian Institute of Toxicology Research'
+            ].map((client) => (
+              <div
+                key={client}
+                className="group bg-white p-10 flex items-center justify-center min-h-[160px] relative overflow-hidden transition-all duration-500 hover:bg-gradient-to-br hover:from-[var(--electric-blue)]/[0.02] hover:to-white"
+              >
+                <div className="absolute left-0 top-0 w-0 h-full bg-[var(--electric-blue)] group-hover:w-1 transition-all duration-300"></div>
+                <p className="text-center font-bold text-gray-700 text-sm md:text-base lg:text-lg leading-tight relative z-10 group-hover:text-[var(--dark-navy)] transition-colors duration-300 group-hover:translate-x-1 transform">
+                  {client}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <div className="inline-flex items-center gap-8 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[var(--electric-blue)] rounded-full"></div>
+                <span className="font-medium">100+ Projects Completed</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[var(--electric-blue)] rounded-full"></div>
+                <span className="font-medium">Pan-India Presence</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-[var(--electric-blue)] rounded-full"></div>
+                <span className="font-medium">20+ Years Experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Values */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

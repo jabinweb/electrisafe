@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { Phone, MessageCircle, Home, Building2, ShoppingBag, Factory, ShieldCheck, Battery, Lightbulb, Wrench } from 'lucide-react';
 
 export const metadata: Metadata = {
@@ -137,10 +138,12 @@ export default function ServicesPage() {
       <section className="relative bg-gradient-to-br from-[var(--dark-navy)] to-gray-900 text-white pt-32 pb-16 overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 opacity-15">
-          <img 
+          <Image 
             src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1920&q=80" 
             alt="Electrical services"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--dark-navy)]/95 to-gray-900/95"></div>
         </div>
