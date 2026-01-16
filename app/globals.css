@@ -1,0 +1,327 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  /* ElectriSafe Brand Colors */
+  --electric-blue: #0080ff;
+  --dark-navy: #0a1f44;
+  --light-blue: #4da6ff;
+  --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+  --gray-900: #111827;
+  
+  /* Success/Safety Colors */
+  --success-green: #10b981;
+  --warning-yellow: #f59e0b;
+  
+  --font-inter: 'Inter', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --radius: 0.5rem;
+  
+  /* Theme colors using ElectriSafe branding */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.42 0.19 254.62); /* Electric Blue */
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.15 0.04 254.62); /* Dark Navy */
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.42 0.19 254.62);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.42 0.19 254.62);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    /* Ensure scrollbar is always visible to prevent layout shift */
+    overflow-y: scroll;
+  }
+
+  /* Fix scrollbar hiding issue with Select component */
+  body {
+    /* Prevent horizontal scroll */
+    overflow-x: hidden;
+  }
+
+  /* Prevent layout shift when Radix components open */
+  [data-radix-popper-content-wrapper] {
+    position: fixed !important;
+    z-index: 50;
+  }
+
+  /* Ensure select dropdown doesn't cause body scroll lock */
+  body[data-scroll-locked] {
+    overflow: auto !important;
+    padding-right: 0 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .heading-primary {
+    font-family: var(--font-poppins);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  .heading-secondary {
+    font-family: var(--font-poppins);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .text-body {
+    font-family: var(--font-inter);
+    line-height: 1.6;
+  }
+
+  .text-education {
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* Enhanced editor paragraph styling */
+  .ProseMirror {
+    outline: none;
+  }
+  
+  .ProseMirror p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  
+  .ProseMirror p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .ProseMirror p:empty {
+    margin-bottom: 1rem;
+  }
+  
+  .ProseMirror p:empty::before {
+    content: '';
+    display: inline-block;
+    height: 1em;
+  }
+  
+  /* Better line break handling */
+  .ProseMirror .hard-break::after {
+    content: '\A';
+    white-space: pre;
+  }
+  
+  /* Ensure blockquotes have proper spacing */
+  .ProseMirror blockquote {
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 4px solid #3b82f6;
+    font-style: italic;
+    color: #6b7280;
+  }
+
+  /* Enhanced blog post content styling */
+  .prose p {
+    margin-bottom: 1.5rem !important;
+    line-height: 1.7 !important;
+  }
+  
+  .prose p:last-child {
+    margin-bottom: 0 !important;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .prose h1:first-child, .prose h2:first-child, .prose h3:first-child,
+  .prose h4:first-child, .prose h5:first-child, .prose h6:first-child {
+    margin-top: 0 !important;
+  }
+  
+  .prose ul, .prose ol {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .prose li {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .prose blockquote {
+    margin: 1.5rem 0 !important;
+    padding: 1rem 1.5rem !important;
+    border-left: 4px solid var(--electric-blue) !important;
+    background: #f8fafc !important;
+    border-radius: 0 0.5rem 0.5rem 0 !important;
+    font-style: normal !important;
+  }
+  
+  .prose img {
+    margin: 2rem auto !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .prose hr {
+    margin: 2rem 0 !important;
+    border-color: #e2e8f0 !important;
+  }
+}
+
+@layer utilities {
+  .bg-electric-blue { background-color: var(--electric-blue); }
+  .bg-dark-navy { background-color: var(--dark-navy); }
+  .bg-light-blue { background-color: var(--light-blue); }
+  .bg-success-green { background-color: var(--success-green); }
+  .text-electric-blue { color: var(--electric-blue); }
+  .text-dark-navy { color: var(--dark-navy); }
+  .text-light-blue { color: var(--light-blue); }
+  .text-success-green { color: var(--success-green); }
+  .border-electric-blue { border-color: var(--electric-blue); }
+  .border-dark-navy { border-color: var(--dark-navy); }
+
+  .font-heading { font-family: var(--font-poppins); }
+  .font-body { font-family: var(--font-inter); }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-up-delay-1 {
+    animation: slideUp 0.8s ease-out 0.5s forwards;
+  }
+  
+  .animate-slide-up-delay-2 {
+    animation: slideUp 0.8s ease-out 1s forwards;
+  }
+  
+  .animate-slide-up-delay-3 {
+    animation: slideUp 0.8s ease-out 1.5s forwards;
+  }
+
+  .animate-text-cycle {
+    animation: textCycle 6s ease-in-out infinite;
+  }
+  
+  .animate-text-cycle-delay-1 {
+    animation: textCycle 6s ease-in-out infinite 2s;
+  }
+  
+  .animate-text-cycle-delay-2 {
+    animation: textCycle 6s ease-in-out infinite 4s;
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll {
+    animation: scroll linear infinite;
+  }
+  
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes textCycle {
+  0%, 16.66% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  33.33%, 83.33% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+

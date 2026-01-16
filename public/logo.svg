@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="256" fill="#0080ff"/>
+  
+  <!-- Lightning Bolt -->
+  <path d="M280 100L200 280H260L232 412L360 232H300L280 100Z" fill="#ffffff" stroke="#0a1f44" stroke-width="8" stroke-linejoin="round"/>
+  
+  <!-- Safety Shield Outline -->
+  <path d="M256 80C256 80 320 100 320 160C320 240 256 340 256 340C256 340 192 240 192 160C192 100 256 80 256 80Z" 
+        fill="none" stroke="#ffffff" stroke-width="12" stroke-linejoin="round" opacity="0.4"/>
+</svg>

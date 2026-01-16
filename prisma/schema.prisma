@@ -1,0 +1,175 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          String    @default("user")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  blogPosts     BlogPost[]
+  uploadedFiles MediaFile[]
+  jobs          Job[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  excerpt     String?
+  slug        String   @unique
+  isPublished Boolean  @default(false)
+  publishDate DateTime?
+  imageUrl    String?
+  tags        String   @default("[]") // JSON string
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  categoryId  String?
+  
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  category Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  description String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  blogPosts   BlogPost[]
+}
+
+model FormResponse {
+  id         String   @id @default(cuid())
+  formName   String
+  data       Json
+  userId     String?
+  email      String?
+  phone      String?
+  status     String?
+  tags       String?
+  source     String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model MediaFile {
+  id          String   @id @default(cuid())
+  filename    String
+  originalName String
+  path        String   @unique // Full file path
+  url         String   @unique // Public URL
+  mimeType    String
+  size        Int
+  alt         String?
+  caption     String?
+  folder      String?  // Directory/category
+  uploadedBy  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  uploader    User     @relation(fields: [uploadedBy], references: [id], onDelete: Cascade)
+  
+  @@index([folder])
+  @@index([mimeType])
+  @@index([uploadedBy])
+}
+
+model JobCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String?
+  icon        String?  // Icon class for UI
+  color       String?  // Color scheme for UI
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  jobs        Job[]
+}
+
+model Job {
+  id                  String      @id @default(cuid())
+  title               String
+  slug                String      @unique
+  description         String
+  qualifications      Json        // Array of strings
+  location            String
+  workHours           String
+  payOut              String
+  department          String
+  type                String      // Full-time, Part-time, Contract
+  experience          String
+  isActive            Boolean     @default(true)
+  applicationDeadline DateTime?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  createdBy           String
+  categoryId          String?
+  
+  creator             User        @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  category            JobCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  
+  @@index([isActive])
+  @@index([department])
+  @@index([type])
+  @@index([categoryId])
+}
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   // JSON string for complex values
+  category  String   // general, email, seo, maintenance, features, security
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  @@index([category])
+}
