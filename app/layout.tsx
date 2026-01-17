@@ -47,10 +47,10 @@ export const metadata: Metadata = {
     locale: "en_IN",
     images: [
       {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'ElectriSafe Power Solutions - Professional Electrical Services',
+        url: 'https://electrisafe.in/icons/icon-512x512.png',
+        width: 512,
+        height: 512,
+        alt: 'ElectriSafe Power Solutions Logo',
       },
     ],
   },
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'ElectriSafe Power Solutions | Professional Electrician in Lucknow',
     description: 'Safe, reliable electrical services for homes and businesses in Lucknow.',
-    images: ['/og-image.jpg'],
+    images: ['https://electrisafe.in/icons/icon-512x512.png'],
   },
   robots: {
     index: true,
