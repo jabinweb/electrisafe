@@ -39,9 +39,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="col-span-1">
-            <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
+          {/* Quick Links and Services - 2 columns on mobile */}
+          <div className="col-span-1 grid grid-cols-2 md:grid-cols-1 lg:grid-cols-1 gap-8 md:gap-0">
+            <div>
+              <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/" className="text-gray-300 hover:text-[var(--electric-blue)] transition-colors text-sm">
@@ -74,11 +75,9 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
-
-          {/* Services */}
-          <div className="col-span-1">
-            <h4 className="text-lg font-semibold mb-4 text-white">Our Services</h4>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4 text-white">Our Services</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/services" className="text-gray-300 hover:text-[var(--electric-blue)] transition-colors text-sm">
@@ -101,6 +100,7 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+            </div>
           </div>
         </div>
 

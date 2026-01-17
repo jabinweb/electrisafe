@@ -2,9 +2,26 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, MessageCircle, Zap, Calendar, CheckCircle, Award, Clock, Users, Star, Home, Building2, Cable, ShieldCheck, Battery, Wrench } from 'lucide-react';
+import { Phone, MessageCircle, Zap, Calendar, CheckCircle, Award, Clock, Users, Star, Home, Building2, Cable, ShieldCheck, Battery, Wrench, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function HomePage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slides = [
+    {
+      url: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80",
+      title: "Professional electrical work"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=80",
+      title: "Electrical panel installation"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=800&q=80",
+      title: "Commercial electrical work"
+    }
+  ];
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -50,16 +67,35 @@ export default function HomePage() {
     slogan: 'Safe Power for Every Space'
   };
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [slides.length]);
+
+  useEffect(() => {
+    // Inject JSON-LD on client side to avoid hydration mismatch
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+    return () => {
+      document.head.removeChild(script);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
   return (
     <div className="min-h-screen">
-      {/* JSON-LD Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c'),
-        }}
-      />
-      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-[var(--dark-navy)] via-gray-900 to-[var(--dark-navy)] text-white pt-40 pb-32 overflow-hidden min-h-[50vh] flex items-center">
         {/* Background Image */}
@@ -82,14 +118,14 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center justify-center lg:justify-start space-x-3 mb-8">
-                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[var(--electric-blue)] to-[var(--light-blue)] rounded-2xl shadow-xl">
-                  <Zap className="w-8 h-8 text-white" />
+              <div className="inline-flex items-center justify-center lg:justify-start space-x-2 mb-8">
+                <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-[var(--electric-blue)] to-[var(--light-blue)] rounded-lg shadow-lg">
+                  <Zap className="w-5 h-5 text-white" />
                 </div>
-                <div className="h-12 w-px bg-gradient-to-b from-transparent via-[var(--electric-blue)] to-transparent"></div>
+                <div className="h-8 w-px bg-gradient-to-b from-transparent via-[var(--electric-blue)] to-transparent"></div>
                 <div className="text-left">
-                  <div className="text-xs font-bold text-[var(--electric-blue)] tracking-widest uppercase">Certified & Trusted</div>
-                  <div className="text-sm text-gray-400">Since 2003</div>
+                  <div className="text-[10px] font-bold text-[var(--electric-blue)] tracking-widest uppercase">Certified & Trusted</div>
+                  <div className="text-xs text-gray-400">Since 2003</div>
                 </div>
               </div>
               
@@ -110,20 +146,20 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link
                   href="/contact"
-                  className="group inline-flex items-center justify-center space-x-3 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] text-white px-10 py-5 rounded-xl font-bold text-lg hover:shadow-2xl hover:shadow-[var(--electric-blue)]/50 transition-all duration-300 hover:scale-105 relative overflow-hidden"
+                  className="group inline-flex items-center justify-center space-x-2 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] text-white px-6 py-3 rounded-lg font-semibold text-base hover:shadow-2xl hover:shadow-[var(--electric-blue)]/50 transition-all duration-300 hover:scale-105 relative overflow-hidden"
                 >
                   <span className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
-                  <Calendar className="w-6 h-6 relative z-10" />
+                  <Calendar className="w-5 h-5 relative z-10" />
                   <span className="relative z-10">Book Service Now</span>
-                  <svg className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <a
                   href="tel:+919565555581"
-                  className="inline-flex items-center justify-center space-x-3 bg-white/10 backdrop-blur-sm text-white px-10 py-5 rounded-xl font-bold text-lg border-2 border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center space-x-2 bg-white/10 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-semibold text-base border-2 border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 hover:scale-105"
                 >
-                  <Phone className="w-6 h-6" />
+                  <Phone className="w-5 h-5" />
                   <span>Call Now</span>
                 </a>
               </div>
@@ -145,40 +181,42 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Content - Stats Card */}
+            {/* Right Content - Image */}
             <div className="hidden lg:block">
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] rounded-3xl blur-2xl opacity-30"></div>
-                <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 shadow-2xl">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="text-center p-6 bg-white/5 rounded-2xl">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] bg-clip-text text-transparent mb-2">100+</div>
-                      <div className="text-sm text-gray-300">Projects Completed</div>
-                    </div>
-                    <div className="text-center p-6 bg-white/5 rounded-2xl">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] bg-clip-text text-transparent mb-2">20+</div>
-                      <div className="text-sm text-gray-300">Years Experience</div>
-                    </div>
-                    <div className="text-center p-6 bg-white/5 rounded-2xl">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] bg-clip-text text-transparent mb-2">24/7</div>
-                      <div className="text-sm text-gray-300">Support Available</div>
-                    </div>
-                    <div className="text-center p-6 bg-white/5 rounded-2xl">
-                      <div className="text-4xl font-bold bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] bg-clip-text text-transparent mb-2">5★</div>
-                      <div className="text-sm text-gray-300">Client Rating</div>
-                    </div>
-                  </div>
+                <div className="absolute -inset-4 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] rounded-3xl blur-3xl opacity-20"></div>
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                  <Image
+                    src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
+                    alt="Professional electrical services"
+                    width={600}
+                    height={700}
+                    className="object-cover w-full h-full rounded-3xl"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--dark-navy)]/60 via-transparent to-transparent"></div>
                   
-                  <div className="mt-8 p-6 bg-gradient-to-br from-[var(--electric-blue)]/20 to-[var(--light-blue)]/20 rounded-2xl border border-[var(--electric-blue)]/30">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="flex -space-x-2">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--electric-blue)] to-[var(--light-blue)] border-2 border-white flex items-center justify-center text-white text-xs font-bold">A</div>
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--light-blue)] to-[var(--electric-blue)] border-2 border-white flex items-center justify-center text-white text-xs font-bold">B</div>
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--electric-blue)] to-[var(--light-blue)] border-2 border-white flex items-center justify-center text-white text-xs font-bold">C</div>
+                  {/* Stats Overlay */}
+                  <div className="absolute bottom-6 left-6 right-6 bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-6">
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div>
+                        <div className="text-2xl font-bold text-white mb-1">100+</div>
+                        <div className="text-xs text-gray-200">Projects</div>
                       </div>
                       <div>
-                        <div className="text-white font-semibold">Trusted by 500+ Clients</div>
-                        <div className="text-xs text-gray-300">Join our satisfied customers</div>
+                        <div className="text-2xl font-bold text-white mb-1">20+</div>
+                        <div className="text-xs text-gray-200">Years</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-white mb-1">24/7</div>
+                        <div className="text-xs text-gray-200">Support</div>
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <span className="text-3xl font-bold text-white">5</span>
+                          <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" />
+                        </div>
+                        <div className="text-xs text-gray-200">Rating</div>
                       </div>
                     </div>
                   </div>
@@ -198,45 +236,76 @@ export default function HomePage() {
               <div className="absolute -inset-4 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] rounded-3xl blur-2xl opacity-20"></div>
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 {/* Main Image Slider Container */}
-                <div className="relative h-[500px] bg-gray-900">
-                  <Image
-                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"
-                    alt="Professional electrical work"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--dark-navy)]/80 via-transparent to-transparent"></div>
+                <div className="relative h-[500px] md:h-[500px] aspect-video md:aspect-auto bg-gray-900">
+                  {slides.map((slide, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-1000 ${
+                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      <Image
+                        src={slide.url}
+                        alt={slide.title}
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--dark-navy)]/80 via-transparent to-transparent"></div>
+                    </div>
+                  ))}
+                  
+                  {/* Navigation Arrows */}
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-2 rounded-full transition-all"
+                    aria-label="Previous slide"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-2 rounded-full transition-all"
+                    aria-label="Next slide"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </button>
+
+                  {/* Slide Indicators */}
+                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                    {slides.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentSlide
+                            ? 'bg-white w-8'
+                            : 'bg-white/50 hover:bg-white/75'
+                        }`}
+                        aria-label={`Go to slide ${index + 1}`}
+                      />
+                    ))}
+                  </div>
                 </div>
 
                 {/* Thumbnail Strip */}
-                <div className="grid grid-cols-3 gap-2 p-3 bg-white">
-                  <div className="relative h-24 rounded-lg overflow-hidden group cursor-pointer">
-                    <Image
-                      src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=300&q=80"
-                      alt="Electrical panel installation"
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-[var(--electric-blue)]/0 group-hover:bg-[var(--electric-blue)]/20 transition-colors"></div>
-                  </div>
-                  <div className="relative h-24 rounded-lg overflow-hidden group cursor-pointer">
-                    <Image
-                      src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?w=300&q=80"
-                      alt="Commercial electrical work"
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-[var(--electric-blue)]/0 group-hover:bg-[var(--electric-blue)]/20 transition-colors"></div>
-                  </div>
-                  <div className="relative h-24 rounded-lg overflow-hidden group cursor-pointer">
-                    <Image
-                      src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=300&q=80"
-                      alt="Residential wiring"
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-[var(--electric-blue)]/0 group-hover:bg-[var(--electric-blue)]/20 transition-colors"></div>
-                  </div>
+                <div className="hidden md:grid grid-cols-3 gap-2 p-3 bg-white">
+                  {slides.map((slide, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`relative h-24 rounded-lg overflow-hidden group cursor-pointer ${
+                        index === currentSlide ? 'ring-2 ring-[var(--electric-blue)]' : ''
+                      }`}
+                    >
+                      <Image
+                        src={slide.url}
+                        alt={slide.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-[var(--electric-blue)]/0 group-hover:bg-[var(--electric-blue)]/20 transition-colors"></div>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -310,16 +379,16 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-[var(--electric-blue)]/30 transition-all duration-300 hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl hover:shadow-[var(--electric-blue)]/30 transition-all duration-300 hover:scale-105"
                 >
                   <span>Learn More About Us</span>
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/services"
-                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-900 px-8 py-4 rounded-xl font-semibold hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] transition-all duration-300"
+                  className="inline-flex items-center justify-center gap-2 bg-white border-2 border-gray-200 text-gray-900 px-6 py-3 rounded-lg font-semibold hover:border-[var(--electric-blue)] hover:text-[var(--electric-blue)] transition-all duration-300"
                 >
                   <span>View All Services</span>
                 </Link>
