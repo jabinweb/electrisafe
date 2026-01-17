@@ -232,11 +232,11 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left - Image Slider */}
-            <div className="relative">
+            <div className="relative w-full">
               <div className="absolute -inset-4 bg-gradient-to-r from-[var(--electric-blue)] to-[var(--light-blue)] rounded-3xl blur-2xl opacity-20"></div>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl w-full">
                 {/* Main Image Slider Container */}
-                <div className="relative h-[500px] md:h-[500px] aspect-video md:aspect-auto bg-gray-900">
+                <div className="relative w-full h-0 pb-[56.25%] md:pb-0 md:h-[500px] bg-gray-900 rounded-3xl overflow-hidden">
                   {slides.map((slide, index) => (
                     <div
                       key={index}
